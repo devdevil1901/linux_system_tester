@@ -18,3 +18,19 @@ plugins {
 application {
     targetMachines.add(machines.linux.x86_64)
 }
+
+// 
+model {
+	toolChains {
+		gcc(Gcc) {
+			eachPlatform {
+				cppCompiler.withArguments { args ->
+					args << '-std=c++14'
+				}
+				linker.withArguments { args ->
+					args << '-lpthread'
+				}
+			}
+		}
+	}
+}
