@@ -47,7 +47,7 @@ std::string SchedRater::evalThreadPriority() {
         )
     );
     pthread_t td = threadManager.getDesc("thread1");
-    scheduler.changeThreadPriority(td, 7, 1);// 0 -> SCHED_NORMAL
+    scheduler.changeThreadPriority(td, 2, 1);// 0 -> SCHED_NORMAL
     sleep(1);
     int prio = scheduler.getThreadPriority(td);
     int prio2 = scheduler.getThreadPriority(threadManager.getDesc("thread2"));
@@ -58,15 +58,17 @@ std::string SchedRater::evalThreadPriority() {
     std::string policy3 = scheduler.getThreadPolicy(threadManager.getDesc("thread3"));
     std::string report = "priority: " + std::to_string(prio) + ", " + std::to_string(prio2) + ", " + std::to_string(prio3) + "\n";
     report += "policy: " + policy + "\n";  
+    report += "policy2: " + policy2 + "\n";  
+    report += "policy3: " + policy3 + "\n";  
     threadManager.waiting("");
     return report;
 }
 
 void SchedRater::scheduleMe(ThreadInfo *param) {
-    for(int i = 0; i<5; i++) {
+    sleep(2);
+    for(int i = 0; i<1000; i++) {
         param->logLock->lock();
         std::cout << param->name << std::endl;
         param->logLock->unlock();
-        sleep(1);
     }
 }
