@@ -34,3 +34,8 @@ model {
 		}
 	}
 }
+
+task runDebug(type:Exec) {
+	workingDir './build/exe/main/debug'
+	commandLine './linux_system_tester'
+}
